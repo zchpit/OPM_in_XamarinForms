@@ -35,7 +35,12 @@ namespace MapsuiFormsSample
 	                var featureLabel = args.Feature?["Label"]?.ToString();
 	                var featureType = args.Feature?["Type"]?.ToString();
 
-	                Debug.WriteLine("Info Event was invoked.");
+	                if (!string.IsNullOrWhiteSpace(featureLabel))
+	                {
+	                    ShowPopup(featureLabel, featureType);
+	                }
+
+                    Debug.WriteLine("Info Event was invoked.");
 	                Debug.WriteLine("Layername: " + layername);
 	                Debug.WriteLine("Feature Label: " + featureLabel);
 	                Debug.WriteLine("Feature Type: " + featureType);
@@ -47,7 +52,20 @@ namespace MapsuiFormsSample
 	        ContentGrid.Children.Add(mapControl);
 	    }
 
-	    private ILayer GenerateIconLayer()
+	    async void ShowPopup(string feature, string type)
+	    {
+	        if (await this.DisplayAlert(
+	            "You have clicked " + feature,
+	            "Do you want to see details?",
+	            "Yes",
+	            "No"))
+	        {
+	            Debug.WriteLine("User clicked OK");
+	            //TODO: here we will make call to another page
+	        }
+	    }
+
+        private ILayer GenerateIconLayer()
 	    {
 	        var layername = "My Local Layer";
 	        return new Layer(layername)
