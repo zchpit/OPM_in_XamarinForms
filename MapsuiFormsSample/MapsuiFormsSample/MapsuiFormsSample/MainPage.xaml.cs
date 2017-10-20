@@ -61,7 +61,6 @@ namespace MapsuiFormsSample
 	            "No"))
 	        {
 	            Debug.WriteLine("User clicked OK");
-	            //TODO: here we will make call to another page
 	        }
 	    }
 
