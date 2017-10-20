@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
@@ -16,7 +17,15 @@ namespace MapsuiFormsSample
 	        var mapControl = new MapsUIView();
 	        mapControl.NativeMap.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-	        var layer = GenerateIconLayer();
+            var centerOfWarsaw = new Point(21.107886, 52.2127475);
+            // OSM uses spherical mercator coordinates. So transform the lon lat coordinates to spherical mercator
+            var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfWarsaw.X, centerOfWarsaw.Y);
+            // Set the center of the viewport to the coordinate. The UI will refresh automatically
+            mapControl.NativeMap.NavigateTo(sphericalMercatorCoordinate);
+            // Additionally you might want to set the resolution, this could depend on your specific purpose
+            mapControl.NativeMap.NavigateTo(mapControl.NativeMap.Resolutions[9]);
+
+            var layer = GenerateIconLayer();
 	        mapControl.NativeMap.Layers.Add(layer);
 	        mapControl.NativeMap.InfoLayers.Add(layer);
 
