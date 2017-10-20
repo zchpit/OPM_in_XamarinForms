@@ -75,12 +75,29 @@ namespace MapsuiFormsSample
 	                        new Point(1107659.9322, 7056389.8538),
 	                        new Point(1066689.6851, 6892508.8652)
 	                    })),
-	                ["Label"] = "My Feature Label",
+	                ["Label"] = "West Germany",
 	                ["Type"] = "My Feature Type"
 	            };
 
 	        features.Add(feature);
-	        return features;
+
+	        features.Add(feature);
+	        var feature2 = new Feature
+	        {
+	            //warsaw
+	            Geometry = new Polygon(new LinearRing(new[]
+	                {
+	                    SphericalMercator.FromLonLat(21.074181, 52.277191),
+	                    SphericalMercator.FromLonLat(21.057358, 52.210131),
+	                    SphericalMercator.FromLonLat(20.981483, 52.238944),
+	                    SphericalMercator.FromLonLat(21.074181, 52.277191),
+	                })
+	            ),
+	            ["Label"] = "Warsaw",
+	            ["Type"] = "My Feature Type"
+	        };
+	        features.Add(feature2);
+            return features;
 	    }
     }
 }
